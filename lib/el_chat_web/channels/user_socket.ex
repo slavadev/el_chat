@@ -1,6 +1,8 @@
 defmodule ElChatWeb.UserSocket do
   use Phoenix.Socket
 
+  channel "user:*", ElChatWeb.UserChannel
+
   transport :websocket, Phoenix.Transports.WebSocket
 
   def connect(%{"token" => token, "user_id" => user_id, "user_name" => user_name}, socket) do
