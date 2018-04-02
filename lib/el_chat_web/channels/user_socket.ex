@@ -2,6 +2,7 @@ defmodule ElChatWeb.UserSocket do
   use Phoenix.Socket
 
   channel "user:*", ElChatWeb.UserChannel
+  channel "chat:*", ElChatWeb.ChatChannel
 
   transport :websocket, Phoenix.Transports.WebSocket
 
