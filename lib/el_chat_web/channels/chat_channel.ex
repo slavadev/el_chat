@@ -17,6 +17,7 @@ defmodule ElChatWeb.ChatChannel do
     messages = Repo.all(from m in Message, where: m.room == ^room, order_by: m.id)
       |> Enum.map(fn m -> Map.take(m, [:id, :user_id, :sent_at, :text]) end)
     push socket, "init:msg", %{messages: messages}
+    Presence.track(socket, socket.assigns.user_id, %{})
     {:noreply, socket}
   end
 
@@ -36,6 +37,9 @@ defmodule ElChatWeb.ChatChannel do
     case Message.changeset(%Message{}, changes) |> Repo.insert do
       {:ok, message} ->
         broadcast! socket, "new:msg", Map.take(message, [:id, :user_id, :text, :sent_at])
+        if Enum.count(Presence.list(socket)) == 1 do
+          ElChatWeb.Endpoint.broadcast!("user:#{opponent_id}", "new:msg", %{user_id: socket.assigns.user_id})
+        end
       {:error, _changeset} -> nil
     end
     {:reply, :ok, socket}
