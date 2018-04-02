@@ -1,5 +1,9 @@
 # ElChat
 
+You can read an article about this project [here](https://medium.com/@korolvs/elixir-beside-rails)
+
+## Starting
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
