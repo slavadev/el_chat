@@ -1,6 +1,6 @@
 # ElChat
 
-You can read an article about this project [here](https://medium.com/@korolvs/elixir-beside-rails)
+You can read an article about this project [here](https://medium.com/@korolvs/elixir-beside-rails-2b94414bcb03)
 
 ## Starting
 
